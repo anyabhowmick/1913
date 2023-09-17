@@ -1,0 +1,84 @@
+#Anya Bhowmick 
+
+def check_isbn13(number): 
+    #return boolean 
+    #no negative isbns 
+    #no more than 13 digit isbn 
+    #determines if the isbn is valid using a given formula 
+
+    if len(str(number)) > 13 or number < 0: 
+        return False  
+    
+    position = 0 
+    evenSum = 0
+    oddSum = 0
+
+    reverseNum = str(number)[::-1]
+    print(reverseNum)
+
+    for digit in str(reverseNum): 
+
+        position += 1 
+
+        if position % 2 == 0: #if even position 
+            evenSum += int(digit) 
+        else: 
+            oddSum += int(digit) 
+    
+    #print(evenSum, oddSum)
+
+    total = oddSum + (3 * evenSum)
+
+    return total % 10 == 0
+    
+        
+
+    
+def make_isbn13(number): 
+    #take in isbn12 and add digit to make isbn13  
+    #if already 13 digits, or a negative number, return -1 
+    #return the final isbn with the extra 'security' digit 
+    
+    if len(str(number)) > 12 or number < 0: 
+        return -1 
+    
+    position = 0 
+    evenSum = 0
+    oddSum = 0
+
+    reverseNum = str(number)[::-1]
+    print(reverseNum)
+
+    for digit in str(reverseNum): 
+
+        position += 1 
+
+        if position % 2 == 0: #if even position 
+            evenSum += int(digit) 
+        else: 
+            oddSum += int(digit) 
+    
+    total = oddSum + (3 * evenSum)
+
+    tenPower = 10**len(str(total)) 
+    y = tenPower - total
+
+    remainder = y % 10
+    
+    while len(str(number)) < 12: #if the isbn isnt at 12 digits, add 0's till it is 
+        number *= 10 
+    
+    return (number * 10) + remainder
+
+
+
+
+def secret_words(): 
+    # to check if we got into piazza/s
+    print('notebook')
+
+#print(check_isbn13(9780452289241))
+# test = make_isbn13(9780452289241)
+# print(check_isbn13(9780452289241), test)
+
+#test1 9780452289241
